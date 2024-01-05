@@ -11,6 +11,9 @@
 		5160CDF62B46F56400DED429 /* ApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5160CDF52B46F56400DED429 /* ApiClient.swift */; };
 		5160CDF82B46F71C00DED429 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5160CDF72B46F71C00DED429 /* NetworkError.swift */; };
 		5160CDFA2B46F98300DED429 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5160CDF92B46F98300DED429 /* Endpoint.swift */; };
+		51E4C5DC2B481001004C1E46 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51E4C5DB2B481001004C1E46 /* HomeView.swift */; };
+		51E4C5DE2B4811F0004C1E46 /* BookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51E4C5DD2B4811F0004C1E46 /* BookView.swift */; };
+		51E4C5E22B4818EA004C1E46 /* DataRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51E4C5E12B4818EA004C1E46 /* DataRow.swift */; };
 		51ED91972B45BA1800E7DD70 /* BookOdysseeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51ED91962B45BA1800E7DD70 /* BookOdysseeApp.swift */; };
 		51ED91992B45BA1800E7DD70 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51ED91982B45BA1800E7DD70 /* ContentView.swift */; };
 		51ED919B2B45BA1900E7DD70 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 51ED919A2B45BA1900E7DD70 /* Assets.xcassets */; };
@@ -44,6 +47,9 @@
 		5160CDF52B46F56400DED429 /* ApiClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiClient.swift; sourceTree = "<group>"; };
 		5160CDF72B46F71C00DED429 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		5160CDF92B46F98300DED429 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
+		51E4C5DB2B481001004C1E46 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		51E4C5DD2B4811F0004C1E46 /* BookView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookView.swift; sourceTree = "<group>"; };
+		51E4C5E12B4818EA004C1E46 /* DataRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataRow.swift; sourceTree = "<group>"; };
 		51ED91932B45BA1800E7DD70 /* BookOdyssee.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BookOdyssee.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		51ED91962B45BA1800E7DD70 /* BookOdysseeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookOdysseeApp.swift; sourceTree = "<group>"; };
 		51ED91982B45BA1800E7DD70 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -94,6 +100,32 @@
 			path = Remote;
 			sourceTree = "<group>";
 		};
+		51E4C5DA2B480FDE004C1E46 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				51E4C5E02B4818D3004C1E46 /* Book */,
+				51E4C5DF2B4818C0004C1E46 /* Home */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		51E4C5DF2B4818C0004C1E46 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				51E4C5DB2B481001004C1E46 /* HomeView.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		51E4C5E02B4818D3004C1E46 /* Book */ = {
+			isa = PBXGroup;
+			children = (
+				51E4C5DD2B4811F0004C1E46 /* BookView.swift */,
+				51E4C5E12B4818EA004C1E46 /* DataRow.swift */,
+			);
+			path = Book;
+			sourceTree = "<group>";
+		};
 		51ED918A2B45BA1800E7DD70 = {
 			isa = PBXGroup;
 			children = (
@@ -117,6 +149,7 @@
 		51ED91952B45BA1800E7DD70 /* BookOdyssee */ = {
 			isa = PBXGroup;
 			children = (
+				51E4C5DA2B480FDE004C1E46 /* Views */,
 				5160CDF22B46F36D00DED429 /* Remote */,
 				51ED91962B45BA1800E7DD70 /* BookOdysseeApp.swift */,
 				51ED91982B45BA1800E7DD70 /* ContentView.swift */,
@@ -283,14 +316,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				51E4C5DC2B481001004C1E46 /* HomeView.swift in Sources */,
 				51ED91A02B45BA1900E7DD70 /* Persistence.swift in Sources */,
 				5160CDF82B46F71C00DED429 /* NetworkError.swift in Sources */,
+				51E4C5E22B4818EA004C1E46 /* DataRow.swift in Sources */,
 				5160CDFA2B46F98300DED429 /* Endpoint.swift in Sources */,
 				51ED91992B45BA1800E7DD70 /* ContentView.swift in Sources */,
 				5160CDF42B46F38600DED429 /* RemoteBookList.swift in Sources */,
 				51ED91972B45BA1800E7DD70 /* BookOdysseeApp.swift in Sources */,
 				5160CDF62B46F56400DED429 /* ApiClient.swift in Sources */,
 				51ED91A32B45BA1900E7DD70 /* BookOdyssee.xcdatamodeld in Sources */,
+				51E4C5DE2B4811F0004C1E46 /* BookView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
