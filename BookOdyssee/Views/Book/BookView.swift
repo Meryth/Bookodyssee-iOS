@@ -19,8 +19,10 @@ struct BookView: View {
                     .resizable()
                     .frame(width: /*@START_MENU_TOKEN@*/100/*@END_MENU_TOKEN@*/, height: 140)
                     .scaledToFit()
-            }
-            .frame(maxWidth:.infinity, alignment: Alignment.center)
+            }.frame(
+                maxWidth: .infinity,
+                alignment: Alignment.center
+            )
             
             
             Divider()

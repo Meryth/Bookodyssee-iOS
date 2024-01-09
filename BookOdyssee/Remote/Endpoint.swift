@@ -12,6 +12,11 @@ let baseUrl : String = "www.googleapis.com"
 struct Endpoint {
     let path: String
     let queryItems: [URLQueryItem]
+    
+     init(path: String, queryItems: [URLQueryItem] = []) {
+        self.path = path
+        self.queryItems = queryItems
+    }
 }
 
 extension Endpoint {
@@ -22,6 +27,10 @@ extension Endpoint {
                 URLQueryItem(name: "q", value: query)
             ]
         )
+    }
+    
+    static func getBookById(id: String) -> Endpoint {
+        return Endpoint(path: "book/v1/volumes/\(id)")
     }
     
     var url: URL? {

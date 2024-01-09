@@ -10,12 +10,12 @@ import CoreData
 
 struct ContentView: View {
     @Environment(\.managedObjectContext) private var viewContext
-
+    
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \Item.timestamp, ascending: true)],
         animation: .default)
     private var items: FetchedResults<Item>
-
+    
     var body: some View {
         NavigationView {
             List {
@@ -41,14 +41,33 @@ struct ContentView: View {
             Text("Select an item")
         }
     }
-
+    
+    let client = ApiClient()
+    
     private func addItem() {
+        
+        
+        Task {
+            do {
+                let books = try await client
+                    .getBooksBySearchTerm(endpoint: .searchBooks(query: "1984"))
+                
+                print(books)
+            }
+        }
+        
+        
+        
+        
         withAnimation {
             let newItem = Item(context: viewContext)
             newItem.timestamp = Date()
-
+            
             do {
                 try viewContext.save()
+                
+                
+                
             } catch {
                 // Replace this implementation with code to handle the error appropriately.
                 // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
@@ -57,11 +76,11 @@ struct ContentView: View {
             }
         }
     }
-
+    
     private func deleteItems(offsets: IndexSet) {
         withAnimation {
             offsets.map { items[$0] }.forEach(viewContext.delete)
-
+            
             do {
                 try viewContext.save()
             } catch {
