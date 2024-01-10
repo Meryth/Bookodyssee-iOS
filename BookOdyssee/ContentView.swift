@@ -7,6 +7,7 @@
 
 import SwiftUI
 import CoreData
+import AsyncReactor
 
 struct ContentView: View {
     @Environment(\.managedObjectContext) private var viewContext
@@ -17,45 +18,39 @@ struct ContentView: View {
     private var items: FetchedResults<Item>
     
     var body: some View {
-        NavigationView {
-            List {
-                ForEach(items) { item in
-                    NavigationLink {
-                        Text("Item at \(item.timestamp!, formatter: itemFormatter)")
-                    } label: {
-                        Text(item.timestamp!, formatter: itemFormatter)
-                    }
-                }
-                .onDelete(perform: deleteItems)
-            }
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    EditButton()
-                }
-                ToolbarItem {
-                    Button(action: addItem) {
-                        Label("Add Item", systemImage: "plus")
-                    }
-                }
-            }
-            Text("Select an item")
+        
+        ReactorView(SearchReactor()) {
+            SearchView()
         }
+        
+//        NavigationView {
+//            List {
+//                ForEach(items) { item in
+//                    NavigationLink {
+//                        Text("Item at \(item.timestamp!, formatter: itemFormatter)")
+//                    } label: {
+//                        Text(item.timestamp!, formatter: itemFormatter)
+//                    }
+//                }
+//                .onDelete(perform: deleteItems)
+//            }
+//            .toolbar {
+//                ToolbarItem(placement: .navigationBarTrailing) {
+//                    EditButton()
+//                }
+//                ToolbarItem {
+//                    Button(action: addItem) {
+//                        Label("Add Item", systemImage: "plus")
+//                    }
+//                }
+//            }
+//            Text("Select an item")
+//        }
     }
     
-    let client = ApiClient()
+    
     
     private func addItem() {
-        
-        
-        Task {
-            do {
-                let books = try await client
-                    .getBooksBySearchTerm(endpoint: .searchBooks(query: "1984"))
-                
-                print(books)
-            }
-        }
-        
         
         
         

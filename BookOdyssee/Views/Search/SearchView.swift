@@ -23,7 +23,8 @@ struct SearchView: View {
                     BookDataRow(
                         bookId: book.id,
                         title: book.volumeInfo.title,
-                        authorList: [""]
+                        authorList: book.volumeInfo.authors,
+                        imageUrl: book.volumeInfo.imageLinks?.thumbnail
                     )
                 }
             }

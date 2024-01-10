@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import AsyncReactor
 
 struct BookView: View {
     var body: some View {
@@ -34,11 +35,14 @@ struct BookView: View {
             Spacer()
             
             HStack() {
-                Button("Add to list", action: {})
+                Button("Add to list", action: {
+                    /*reactor.send(.onQueryChange(<#T##String#>))*/
+                     })
                     .padding(15)
                     .frame(maxWidth: .infinity)
                     .background(Color("Primary"))
                     .foregroundColor(.white)
+                
             }.padding(.horizontal)
             
             Spacer()

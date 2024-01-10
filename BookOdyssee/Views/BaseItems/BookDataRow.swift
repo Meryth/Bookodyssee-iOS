@@ -11,22 +11,33 @@ struct BookDataRow: View {
     
     var bookId: String
     var title: String
-    var authorList: [String]
+    var authorList: [String]?
     var imageUrl : String?
     
     var body: some View {
-        HStack() {
+        HStack {
             if let image = imageUrl {
-                Image(image)
+                AsyncImage(
+                    url: URL(string: image)
+                )
+                .frame(width: 64, height: 100)
+                .scaledToFit()
+            } else {
+                Image("NoImagePlaceholder")
                     .resizable()
                     .frame(width: 64, height: 100)
                     .scaledToFit()
             }
-            VStack() {
-                Text(title).fontWeight(.bold)
-                ForEach(authorList, id: \.self) { author in
-                    Text(author)
+            VStack(alignment: .leading) {
+                Text(title)
+                    .fontWeight(.bold)
+                
+                if let authors = authorList {
+                    ForEach(authors, id: \.self) { author in
+                        Text(author)
+                    }
                 }
+                
             }
             Spacer()
         }
@@ -37,7 +48,6 @@ struct BookDataRow: View {
     BookDataRow(
         bookId: "bookId",
         title: "Book",
-        authorList: ["Author", "Bob"],
-        imageUrl: "tempPlaceholder"
+        authorList: ["Author", "Bob"]
     )
 }
