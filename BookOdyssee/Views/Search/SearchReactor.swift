@@ -45,20 +45,16 @@ class SearchReactor: AsyncReactor {
     func action(_ action: Action) async {
         switch action {
         case .onSearchClick:
+            if(state.query.isEmpty) {
+                print("query is empty!")
+                return
+            }
+            
             do {
-                if(state.query.isEmpty) {
-                    print("query is empty!")
-                    return
-                }
-                
-                do {
-                    state.searchResult = try await apiClient.getBooksBySearchTerm(endpoint: .searchBooks(query: state.query)).items
-                } catch {
-                    print("Error when fetching books!")
-                }
+                state.searchResult = try await apiClient.getBooksBySearchTerm(endpoint: .searchBooks(query: state.query)).items
+            } catch {
+                print("Error when fetching books!")
             }
         }
-        
     }
-    
 }

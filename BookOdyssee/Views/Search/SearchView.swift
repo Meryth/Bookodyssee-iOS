@@ -38,14 +38,11 @@ struct SearchView: View {
         .onSubmit(of: .search) {
             reactor.send(.onSearchClick)
         }
-        .task {
-            //use task when action to be called when view is initialized
-            await reactor.action(.onSearchClick)
-        }
     }
 }
 
 #Preview {
-    
-    SearchView()
+    ReactorView(SearchReactor()) {
+        SearchView()
+    }
 }

@@ -30,7 +30,7 @@ extension Endpoint {
     }
     
     static func getBookById(id: String) -> Endpoint {
-        return Endpoint(path: "book/v1/volumes/\(id)")
+        return Endpoint(path: "/books/v1/volumes/\(id)")
     }
     
     var url: URL? {

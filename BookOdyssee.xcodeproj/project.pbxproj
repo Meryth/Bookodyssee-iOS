@@ -11,6 +11,7 @@
 		510499AE2B4D9EF300DD2A93 /* SearchReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 510499AD2B4D9EF300DD2A93 /* SearchReactor.swift */; };
 		510499B12B4DAADA00DD2A93 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 510499B02B4DAADA00DD2A93 /* SearchView.swift */; };
 		510499B62B4DAB8100DD2A93 /* BookDataRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 510499B52B4DAB8100DD2A93 /* BookDataRow.swift */; };
+		511611772B4F2FA30006D3D8 /* BookReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 511611762B4F2FA30006D3D8 /* BookReactor.swift */; };
 		5160CDF42B46F38600DED429 /* RemoteBookList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5160CDF32B46F38600DED429 /* RemoteBookList.swift */; };
 		5160CDF62B46F56400DED429 /* ApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5160CDF52B46F56400DED429 /* ApiClient.swift */; };
 		5160CDF82B46F71C00DED429 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5160CDF72B46F71C00DED429 /* NetworkError.swift */; };
@@ -50,6 +51,7 @@
 		510499AD2B4D9EF300DD2A93 /* SearchReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchReactor.swift; sourceTree = "<group>"; };
 		510499B02B4DAADA00DD2A93 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		510499B52B4DAB8100DD2A93 /* BookDataRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDataRow.swift; sourceTree = "<group>"; };
+		511611762B4F2FA30006D3D8 /* BookReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookReactor.swift; sourceTree = "<group>"; };
 		5160CDF32B46F38600DED429 /* RemoteBookList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteBookList.swift; sourceTree = "<group>"; };
 		5160CDF52B46F56400DED429 /* ApiClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiClient.swift; sourceTree = "<group>"; };
 		5160CDF72B46F71C00DED429 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
@@ -149,6 +151,7 @@
 			children = (
 				51E4C5DD2B4811F0004C1E46 /* BookView.swift */,
 				51E4C5E12B4818EA004C1E46 /* DataRow.swift */,
+				511611762B4F2FA30006D3D8 /* BookReactor.swift */,
 			);
 			path = Book;
 			sourceTree = "<group>";
@@ -359,6 +362,7 @@
 				51ED91992B45BA1800E7DD70 /* ContentView.swift in Sources */,
 				5160CDF42B46F38600DED429 /* RemoteBookList.swift in Sources */,
 				510499B12B4DAADA00DD2A93 /* SearchView.swift in Sources */,
+				511611772B4F2FA30006D3D8 /* BookReactor.swift in Sources */,
 				51ED91972B45BA1800E7DD70 /* BookOdysseeApp.swift in Sources */,
 				5160CDF62B46F56400DED429 /* ApiClient.swift in Sources */,
 				51ED91A32B45BA1900E7DD70 /* BookOdyssee.xcdatamodeld in Sources */,
