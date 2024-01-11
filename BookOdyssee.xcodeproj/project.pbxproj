@@ -12,6 +12,7 @@
 		510499B12B4DAADA00DD2A93 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 510499B02B4DAADA00DD2A93 /* SearchView.swift */; };
 		510499B62B4DAB8100DD2A93 /* BookDataRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 510499B52B4DAB8100DD2A93 /* BookDataRow.swift */; };
 		511611772B4F2FA30006D3D8 /* BookReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 511611762B4F2FA30006D3D8 /* BookReactor.swift */; };
+		512913EE2B50903F00B08253 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 512913ED2B50903F00B08253 /* DataController.swift */; };
 		5160CDF42B46F38600DED429 /* RemoteBookList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5160CDF32B46F38600DED429 /* RemoteBookList.swift */; };
 		5160CDF62B46F56400DED429 /* ApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5160CDF52B46F56400DED429 /* ApiClient.swift */; };
 		5160CDF82B46F71C00DED429 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5160CDF72B46F71C00DED429 /* NetworkError.swift */; };
@@ -52,6 +53,7 @@
 		510499B02B4DAADA00DD2A93 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		510499B52B4DAB8100DD2A93 /* BookDataRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDataRow.swift; sourceTree = "<group>"; };
 		511611762B4F2FA30006D3D8 /* BookReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookReactor.swift; sourceTree = "<group>"; };
+		512913ED2B50903F00B08253 /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 		5160CDF32B46F38600DED429 /* RemoteBookList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteBookList.swift; sourceTree = "<group>"; };
 		5160CDF52B46F56400DED429 /* ApiClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiClient.swift; sourceTree = "<group>"; };
 		5160CDF72B46F71C00DED429 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
@@ -114,6 +116,16 @@
 				510499B52B4DAB8100DD2A93 /* BookDataRow.swift */,
 			);
 			path = BaseItems;
+			sourceTree = "<group>";
+		};
+		512913E92B508D5400B08253 /* Persistence */ = {
+			isa = PBXGroup;
+			children = (
+				51ED919F2B45BA1900E7DD70 /* Persistence.swift */,
+				51ED91A12B45BA1900E7DD70 /* BookOdyssee.xcdatamodeld */,
+				512913ED2B50903F00B08253 /* DataController.swift */,
+			);
+			path = Persistence;
 			sourceTree = "<group>";
 		};
 		5160CDF22B46F36D00DED429 /* Remote */ = {
@@ -184,8 +196,7 @@
 				51ED91962B45BA1800E7DD70 /* BookOdysseeApp.swift */,
 				51ED91982B45BA1800E7DD70 /* ContentView.swift */,
 				51ED919A2B45BA1900E7DD70 /* Assets.xcassets */,
-				51ED919F2B45BA1900E7DD70 /* Persistence.swift */,
-				51ED91A12B45BA1900E7DD70 /* BookOdyssee.xcdatamodeld */,
+				512913E92B508D5400B08253 /* Persistence */,
 				51ED919C2B45BA1900E7DD70 /* Preview Content */,
 			);
 			path = BookOdyssee;
@@ -365,6 +376,7 @@
 				511611772B4F2FA30006D3D8 /* BookReactor.swift in Sources */,
 				51ED91972B45BA1800E7DD70 /* BookOdysseeApp.swift in Sources */,
 				5160CDF62B46F56400DED429 /* ApiClient.swift in Sources */,
+				512913EE2B50903F00B08253 /* DataController.swift in Sources */,
 				51ED91A32B45BA1900E7DD70 /* BookOdyssee.xcdatamodeld in Sources */,
 				51E4C5DE2B4811F0004C1E46 /* BookView.swift in Sources */,
 			);

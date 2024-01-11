@@ -16,16 +16,21 @@ struct SearchView: View {
     var body: some View {
         
         NavigationStack {
-            if reactor.searchResult.isEmpty {
-                Text("No result!")
-            } else {
-                List(reactor.searchResult, id: \.id) { book in
-                    BookDataRow(
-                        bookId: book.id,
-                        title: book.volumeInfo.title,
-                        authorList: book.volumeInfo.authors,
-                        imageUrl: book.volumeInfo.imageLinks?.thumbnail
-                    )
+            ZStack {
+                if reactor.searchResult.isEmpty {
+                    Text("No result!")
+                } else {
+                    List(reactor.searchResult, id: \.id) { book in
+                        BookDataRow(
+                            book: book
+                        )
+                    }
+                }
+            }
+            .navigationTitle("Search")
+            .navigationDestination(for: BookItem.self) { book in
+                ReactorView(BookReactor()) {
+                    BookView(bookId: book.id)
                 }
             }
         }

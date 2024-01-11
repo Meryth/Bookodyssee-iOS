@@ -12,7 +12,7 @@ private let apiClient = ApiClient()
 
 class BookReactor: AsyncReactor {
     enum Action {
-        case loadBookData
+        case loadBookData(String)
     }
     
     struct State {
@@ -29,9 +29,9 @@ class BookReactor: AsyncReactor {
     
     func action(_ action: Action) async {
         switch action {
-        case .loadBookData:
+        case .loadBookData(let bookId):
             do {
-                state.book = try await apiClient.getBookById(endpoint: .getBookById(id: "ImAGEAAAQBAJ"))
+                state.book = try await apiClient.getBookById(endpoint: .getBookById(id: bookId))
             } catch {
                 print("Error when fetching book data!")
                 print(error)

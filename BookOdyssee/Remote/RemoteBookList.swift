@@ -11,12 +11,12 @@ struct RemoteBookList : Decodable {
     var items: [BookItem]
 }
 
-struct BookItem : Decodable {
+struct BookItem : Decodable, Hashable {
     var id: String
     var volumeInfo: VolumeInfo
 }
 
-struct VolumeInfo: Decodable {
+struct VolumeInfo: Decodable, Hashable {
     var title: String
     var authors: [String]?
     var publisher: String?
@@ -26,6 +26,6 @@ struct VolumeInfo: Decodable {
     var imageLinks: BookImageLinks?
 }
 
-struct BookImageLinks: Decodable {
+struct BookImageLinks: Decodable, Hashable {
     var thumbnail: String?
 }

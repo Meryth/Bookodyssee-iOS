@@ -13,6 +13,8 @@ struct BookView: View {
     @EnvironmentObject
     private var reactor : BookReactor
     
+    var bookId : String
+    
     var body: some View {
         VStack(alignment: .leading) {
             
@@ -73,7 +75,7 @@ struct BookView: View {
                 Spacer()
             }
         }.task {
-            reactor.send(.loadBookData)
+            reactor.send(.loadBookData(bookId))
         }
     }
 }
@@ -93,5 +95,7 @@ func getAuthorString(authorList: [String]) -> String {
 }
 
 #Preview {
-    BookView()
+    ReactorView(BookReactor()) {
+        BookView(bookId: "ImAGEAAAQBAJ")
+    }
 }
