@@ -22,7 +22,7 @@ struct VolumeInfo: Decodable, Hashable {
     var publisher: String?
     var publishedDate: String
     var description: String?
-    var pageCount: Int
+    var pageCount: Int?
     var imageLinks: BookImageLinks?
 }
 

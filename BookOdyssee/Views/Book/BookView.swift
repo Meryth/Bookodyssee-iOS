@@ -13,6 +13,9 @@ struct BookView: View {
     @EnvironmentObject
     private var reactor : BookReactor
     
+    @Environment(\.managedObjectContext) private var viewContext
+    @Environment(\.managedObjectContext) var moc
+    
     var bookId : String
     
     var body: some View {
@@ -57,13 +60,26 @@ struct BookView: View {
                 
                 DataRow(label: "Published", value: book.volumeInfo.publishedDate)
                 
-                DataRow(label: "Page count:", value: String(book.volumeInfo.pageCount))
+                if let pageCount = book.volumeInfo.pageCount {
+                    DataRow(label: "Page count:", value: String(pageCount))
+                }
                 
                 Spacer()
                 
                 HStack() {
                     Button("Add to list", action: {
-                        /*reactor.send(.onQueryChange(<#T##String#>))*/
+                        //TODO: move logic to reactor
+                        let localBook = LocalBook(context: moc)
+                        
+                        localBook.bookId = book.id
+                        localBook.title = book.volumeInfo.title
+                        localBook.authors = book.volumeInfo.authors?.first
+                        localBook.imageLink = book.volumeInfo.imageLinks?.thumbnail
+                        localBook.publishedDate = book.volumeInfo.publishedDate
+                        localBook.publisher = book.volumeInfo.publisher
+                        localBook.readingState = "TO READ"
+                        
+                        try? moc.save()
                     })
                     .padding(15)
                     .frame(maxWidth: .infinity)
