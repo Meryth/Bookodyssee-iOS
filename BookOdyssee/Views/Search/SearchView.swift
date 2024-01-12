@@ -35,16 +35,15 @@ struct SearchView: View {
                     BookView(bookId: book.id)
                 }
             }
-            .searchable(
-                text: Binding(
-                    get: {reactor.query},
-                    set: {reactor.action(.onQueryChange($0))}
-                ),
-                prompt: "Enter title, author..."
-            )
-            .onSubmit(of: .search) {
-                reactor.send(.onSearchClick)
-            }
+        }
+        .searchable(
+            text: Binding(
+                get: {reactor.query},
+                set: {reactor.action(.onQueryChange($0))}
+            ),
+            prompt: "Enter title, author...")
+        .onSubmit(of: .search) {
+            reactor.send(.onSearchClick)
         }
     }
 }
