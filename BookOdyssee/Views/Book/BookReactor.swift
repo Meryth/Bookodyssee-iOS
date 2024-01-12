@@ -11,7 +11,7 @@ import CoreData
 
 private let apiClient = ApiClient()
 
-class BookReactor: AsyncReactor {    
+class BookReactor: AsyncReactor {
     
     var moc: NSManagedObjectContext
     
@@ -22,6 +22,7 @@ class BookReactor: AsyncReactor {
     
     struct State {
         var book: BookItem? = nil
+        var isBookSavedToRead: Bool = false
     }
     
     @Published
@@ -38,6 +39,16 @@ class BookReactor: AsyncReactor {
         case .loadBookData(let bookId):
             do {
                 state.book = try await apiClient.getBookById(endpoint: .getBookById(id: bookId))
+                
+                let savedBooks : NSFetchRequest<LocalBook> = LocalBook.fetchRequest()
+                if let bookId = state.book?.id {
+                    savedBooks.predicate = NSPredicate(format: "bookId == %@", bookId)
+                    let numberOfBooks = try moc.count(for: savedBooks)
+                    
+                    if numberOfBooks > 0 {
+                        state.isBookSavedToRead = true
+                    }
+                }
             } catch {
                 print("Error when fetching book data!")
                 print(error)

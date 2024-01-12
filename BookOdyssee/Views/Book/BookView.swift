@@ -66,13 +66,15 @@ struct BookView: View {
                 Spacer()
                 
                 HStack() {
-                    Button("Add to list", action: {
-                        reactor.send(.addBookToReadingList)
-                    })
-                    .padding(15)
-                    .frame(maxWidth: .infinity)
-                    .background(Color("Primary"))
-                    .foregroundColor(.white)
+                    if(!reactor.isBookSavedToRead) {
+                        Button("Add to list", action: {
+                            reactor.send(.addBookToReadingList)
+                        })
+                        .padding(15)
+                        .frame(maxWidth: .infinity)
+                        .background(Color("Primary"))
+                        .foregroundColor(.white)
+                    }
                     
                 }.padding(.horizontal)
                 
