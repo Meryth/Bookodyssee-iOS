@@ -13,6 +13,8 @@ struct SearchView: View {
     @EnvironmentObject
     private var reactor: SearchReactor
     
+    @Environment(\.managedObjectContext) private var viewContext
+    
     var body: some View {
         
         NavigationStack {
@@ -29,7 +31,7 @@ struct SearchView: View {
             }
             .navigationTitle("Search")
             .navigationDestination(for: BookItem.self) { book in
-                ReactorView(BookReactor()) {
+                ReactorView(BookReactor(dbContext: viewContext)) {
                     BookView(bookId: book.id)
                 }
             }

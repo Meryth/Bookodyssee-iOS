@@ -45,7 +45,7 @@ struct HomeView: View {
                         }
                     }.navigationDestination(for: LocalBook.self) { book in
                         if let bookId = book.bookId {
-                            ReactorView(BookReactor()) {
+                            ReactorView(BookReactor(dbContext: viewContext)) {
                                 BookView(bookId: bookId)
                             }
                         }

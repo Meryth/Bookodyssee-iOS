@@ -14,7 +14,6 @@ struct BookView: View {
     private var reactor : BookReactor
     
     @Environment(\.managedObjectContext) private var viewContext
-    @Environment(\.managedObjectContext) var moc
     
     var bookId : String
     
@@ -68,18 +67,7 @@ struct BookView: View {
                 
                 HStack() {
                     Button("Add to list", action: {
-                        //TODO: move logic to reactor
-                        let localBook = LocalBook(context: moc)
-                        
-                        localBook.bookId = book.id
-                        localBook.title = book.volumeInfo.title
-                        localBook.authors = book.volumeInfo.authors?.first
-                        localBook.imageLink = book.volumeInfo.imageLinks?.thumbnail
-                        localBook.publishedDate = book.volumeInfo.publishedDate
-                        localBook.publisher = book.volumeInfo.publisher
-                        localBook.readingState = "TO READ"
-                        
-                        try? moc.save()
+                        reactor.send(.addBookToReadingList)
                     })
                     .padding(15)
                     .frame(maxWidth: .infinity)
@@ -108,10 +96,4 @@ func getAuthorString(authorList: [String]) -> String {
     }
     
     return fullAuthorList
-}
-
-#Preview {
-    ReactorView(BookReactor()) {
-        BookView(bookId: "ImAGEAAAQBAJ")
-    }
 }
