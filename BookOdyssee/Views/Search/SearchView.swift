@@ -23,27 +23,26 @@ struct SearchView: View {
                     Text("No result!")
                 } else {
                     List(reactor.searchResult, id: \.id) { book in
-                        BookDataRow(
-                            book: book
-                        )
+                        NavigationLink(destination: ReactorView(
+                            BookReactor(dbContext: viewContext)
+                        ) {
+                            BookView(bookId: book.id)
+                        }) {
+                            BookDataRow(book: book)
+                        }
                     }
                 }
             }
             .navigationTitle("Search")
-            .navigationDestination(for: BookItem.self) { book in
-                ReactorView(BookReactor(dbContext: viewContext)) {
-                    BookView(bookId: book.id)
-                }
+            .searchable(
+                text: Binding(
+                    get: {reactor.query},
+                    set: {reactor.action(.onQueryChange($0))}
+                ),
+                prompt: "Enter title, author...")
+            .onSubmit(of: .search) {
+                reactor.send(.onSearchClick)
             }
-        }
-        .searchable(
-            text: Binding(
-                get: {reactor.query},
-                set: {reactor.action(.onQueryChange($0))}
-            ),
-            prompt: "Enter title, author...")
-        .onSubmit(of: .search) {
-            reactor.send(.onSearchClick)
         }
     }
 }

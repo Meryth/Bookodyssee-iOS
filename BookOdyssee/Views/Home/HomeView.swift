@@ -18,7 +18,13 @@ struct HomeView: View {
         NavigationStack {
             VStack {
                 List(books, id: \.id) { book in
-                    NavigationLink(value: book.self) {
+                    NavigationLink(destination: ReactorView(
+                        BookReactor(dbContext: viewContext)
+                    ) {
+                        if let bookId = book.bookId {
+                            BookView(bookId: bookId)
+                        }
+                    }) {
                         HStack {
                             if let image = book.imageLink {
                                 AsyncImage(
@@ -46,13 +52,6 @@ struct HomeView: View {
                     }
                 }
                 .navigationTitle("To Read")
-                .navigationDestination(for: LocalBook.self) { book in
-                    if let bookId = book.bookId {
-                        ReactorView(BookReactor(dbContext: viewContext)) {
-                            BookView(bookId: bookId)
-                        }
-                    }
-                }
             }.toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     NavigationLink(
