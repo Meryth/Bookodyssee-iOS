@@ -44,7 +44,7 @@ struct HomeView: View {
                                         .fontWeight(.bold)
                                 }
                                 if let authors = book.authors {
-                                    Text(authors)
+                                    Text(getAuthorString(authorList:authors))
                                 }
                             }
                             Spacer()

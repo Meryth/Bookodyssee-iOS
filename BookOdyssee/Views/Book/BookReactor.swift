@@ -59,7 +59,7 @@ class BookReactor: AsyncReactor {
                 
                 localBook.bookId = state.book?.id
                 localBook.title = state.book?.volumeInfo.title
-                localBook.authors = state.book?.volumeInfo.authors?.first
+                localBook.authors = state.book?.volumeInfo.authors
                 localBook.imageLink = state.book?.volumeInfo.imageLinks?.thumbnail
                 localBook.publishedDate = state.book?.volumeInfo.publishedDate
                 localBook.publisher = state.book?.volumeInfo.publisher

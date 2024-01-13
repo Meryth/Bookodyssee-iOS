@@ -90,7 +90,7 @@ func getAuthorString(authorList: [String]) -> String {
     var fullAuthorList = ""
     
     for author in authorList {
-        if authorList.isEmpty {
+        if fullAuthorList.isEmpty {
             fullAuthorList.append(author)
         } else {
             fullAuthorList.append(", \(author)")
