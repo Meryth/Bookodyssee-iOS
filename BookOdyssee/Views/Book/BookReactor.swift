@@ -18,11 +18,13 @@ class BookReactor: AsyncReactor {
     enum Action {
         case loadBookData(String)
         case addBookToReadingList
+        case removeBookFromReadingList
     }
     
     struct State {
         var book: BookItem? = nil
         var isBookSavedToRead: Bool = false
+        var localBook: LocalBook? = nil
     }
     
     @Published
@@ -55,21 +57,64 @@ class BookReactor: AsyncReactor {
             }
         case .addBookToReadingList:
             do {
-                let localBook = LocalBook(context: moc)
+                guard let bookItem = state.book else {
+                    print("Book cannot be nil!")
+                    throw CoreException.NilPointerError
+                }
                 
-                localBook.bookId = state.book?.id
-                localBook.title = state.book?.volumeInfo.title
-                localBook.authors = state.book?.volumeInfo.authors
-                localBook.imageLink = state.book?.volumeInfo.imageLinks?.thumbnail
-                localBook.publishedDate = state.book?.volumeInfo.publishedDate
-                localBook.publisher = state.book?.volumeInfo.publisher
-                localBook.readingState = "TO READ"
+                convertBookItemToLocalBook(bookItem: bookItem)
                 
                 try moc.save()
+                
+                state.isBookSavedToRead = true
             } catch {
                 print("Error while saving book to DB!")
                 print(error)
             }
+        case .removeBookFromReadingList:
+            do {
+                let savedBooks : NSFetchRequest<LocalBook> = LocalBook.fetchRequest()
+                
+                if let bookId = state.book?.id {
+                    savedBooks.predicate = NSPredicate(format: "bookId == %@", bookId)
+                    
+                    do {
+                        let objects = try moc.fetch(savedBooks).first
+                        
+                        if let localBook = objects {
+                            moc.delete(localBook)
+                            
+                            do {
+                                try moc.save()
+                                state.isBookSavedToRead = false
+                            } catch {
+                                print("Error while deleting book from DB!")
+                                print(error)
+                                
+                            }
+                        }
+                    } catch {
+                        print("Unable to fetch saved books from DB!")
+                        print(error)
+                    }
+                }
+            }
         }
+    }
+}
+
+extension BookReactor {
+    func convertBookItemToLocalBook(bookItem: BookItem) -> LocalBook {
+        let localBook = LocalBook(context: moc)
+        
+        localBook.bookId = bookItem.id
+        localBook.title = bookItem.volumeInfo.title
+        localBook.authors = bookItem.volumeInfo.authors
+        localBook.imageLink = bookItem.volumeInfo.imageLinks?.thumbnail
+        localBook.publishedDate = bookItem.volumeInfo.publishedDate
+        localBook.publisher = bookItem.volumeInfo.publisher
+        localBook.readingState = "TO READ"
+        
+        return localBook
     }
 }

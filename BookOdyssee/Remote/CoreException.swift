@@ -7,6 +7,7 @@
 
 import Foundation
 
-enum NetworkError : Error {
+enum CoreException : Error {
     case InvalidUrlError
+    case NilPointerError
 }

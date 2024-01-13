@@ -28,10 +28,16 @@ struct HomeView: View {
                         HStack {
                             if let image = book.imageLink {
                                 AsyncImage(
-                                    url: URL(string: image)
+                                    url: URL(string: image),
+                                    content: {image in
+                                        image.resizable()
+                                            .aspectRatio(contentMode: .fit)
+                                            .frame(width: 64, height: 100)
+                                    },
+                                    placeholder: {
+                                       ProgressView()
+                                    }
                                 )
-                                .frame(width: 64, height: 100)
-                                .scaledToFit()
                             } else {
                                 Image("NoImagePlaceholder")
                                     .resizable()

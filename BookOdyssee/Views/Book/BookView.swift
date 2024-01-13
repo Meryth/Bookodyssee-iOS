@@ -26,6 +26,7 @@ struct BookView: View {
                     Text(book.volumeInfo.title)
                         .font(.largeTitle)
                         .frame(alignment: .top)
+                        .padding(.bottom)
                     
                     if let image = book.volumeInfo.imageLinks?.thumbnail {
                         AsyncImage(url: URL(string: image))
@@ -66,7 +67,15 @@ struct BookView: View {
                 Spacer()
                 
                 HStack() {
-                    if(!reactor.isBookSavedToRead) {
+                    if(reactor.isBookSavedToRead) {
+                        Button("Remove from list", action: {
+                            reactor.send(.removeBookFromReadingList)
+                        })
+                        .padding(15)
+                        .frame(maxWidth: .infinity)
+                        .background(Color("Primary"))
+                        .foregroundColor(.white)
+                    } else {
                         Button("Add to list", action: {
                             reactor.send(.addBookToReadingList)
                         })

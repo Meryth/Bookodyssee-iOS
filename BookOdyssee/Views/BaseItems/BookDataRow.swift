@@ -16,10 +16,16 @@ struct BookDataRow: View {
             HStack {
                 if let image = book.volumeInfo.imageLinks?.thumbnail {
                     AsyncImage(
-                        url: URL(string: image)
+                        url: URL(string: image),
+                        content: {image in
+                            image.resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 64, height: 100)
+                        },
+                        placeholder: {
+                            ProgressView()
+                        }
                     )
-                    .frame(width: 64, height: 100)
-                    .scaledToFit()
                 } else {
                     Image("NoImagePlaceholder")
                         .resizable()
@@ -50,7 +56,8 @@ struct BookDataRow: View {
             volumeInfo: VolumeInfo(
                 title: "title",
                 publishedDate: "19.05.2023",
-                pageCount: 500)
+                pageCount: 500
+            )
         )
     )
 }

@@ -14,7 +14,7 @@ struct ApiClient {
     func apiGet(endpoint : Endpoint) async throws -> Data {
         
         guard let requestUrl = endpoint.url else {
-            throw NetworkError.InvalidUrlError
+            throw CoreException.InvalidUrlError
         }
         
         var request = URLRequest(url: requestUrl)
