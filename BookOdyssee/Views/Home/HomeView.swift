@@ -43,15 +43,28 @@ struct HomeView: View {
                             }
                             Spacer()
                         }
-                    }.navigationDestination(for: LocalBook.self) { book in
-                        if let bookId = book.bookId {
-                            ReactorView(BookReactor(dbContext: viewContext)) {
-                                BookView(bookId: bookId)
-                            }
+                    }
+                }
+                .navigationTitle("To Read")
+                .navigationDestination(for: LocalBook.self) { book in
+                    if let bookId = book.bookId {
+                        ReactorView(BookReactor(dbContext: viewContext)) {
+                            BookView(bookId: bookId)
                         }
                     }
                 }
+            }.toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    NavigationLink(
+                        destination: ReactorView(SearchReactor()) {
+                            SearchView()
+                        }
+                    ) {
+                        Image(systemName: "plus")
+                    }
+                }
             }
+            
         }
     }
 }
