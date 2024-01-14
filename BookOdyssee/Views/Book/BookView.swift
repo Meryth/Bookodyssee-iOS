@@ -68,21 +68,25 @@ struct BookView: View {
                 
                 HStack() {
                     if(reactor.isBookSavedToRead) {
-                        Button("Remove from list", action: {
+                        Button(action: {
                             reactor.send(.removeBookFromReadingList)
-                        })
-                        .padding(15)
-                        .frame(maxWidth: .infinity)
-                        .background(Color("Primary"))
-                        .foregroundColor(.white)
+                        }) {
+                            Text("Remove from list")
+                                .padding(15)
+                                .frame(maxWidth: .infinity)
+                                .background(Color("Primary"))
+                                .foregroundColor(.white)
+                        }
                     } else {
-                        Button("Add to list", action: {
+                        Button(action: {
                             reactor.send(.addBookToReadingList)
-                        })
-                        .padding(15)
-                        .frame(maxWidth: .infinity)
-                        .background(Color("Primary"))
-                        .foregroundColor(.white)
+                        }) {
+                            Text("Add to list")
+                                .padding(15)
+                                .frame(maxWidth: .infinity)
+                                .background(Color("Primary"))
+                                .foregroundColor(.white)
+                        }
                     }
                     
                 }.padding(.horizontal)

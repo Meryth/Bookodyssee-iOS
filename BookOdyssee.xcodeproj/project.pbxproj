@@ -13,6 +13,9 @@
 		510499B62B4DAB8100DD2A93 /* BookDataRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 510499B52B4DAB8100DD2A93 /* BookDataRow.swift */; };
 		511611772B4F2FA30006D3D8 /* BookReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 511611762B4F2FA30006D3D8 /* BookReactor.swift */; };
 		512913EE2B50903F00B08253 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 512913ED2B50903F00B08253 /* DataController.swift */; };
+		513A1FE22B53D3C8007F1543 /* RegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 513A1FE12B53D3C8007F1543 /* RegistrationView.swift */; };
+		513A1FE42B53D520007F1543 /* RegistrationReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 513A1FE32B53D520007F1543 /* RegistrationReactor.swift */; };
+		515DBCB62B5346E6000F2593 /* StartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 515DBCB52B5346E6000F2593 /* StartView.swift */; };
 		5160CDF42B46F38600DED429 /* RemoteBookList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5160CDF32B46F38600DED429 /* RemoteBookList.swift */; };
 		5160CDF62B46F56400DED429 /* ApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5160CDF52B46F56400DED429 /* ApiClient.swift */; };
 		5160CDF82B46F71C00DED429 /* CoreException.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5160CDF72B46F71C00DED429 /* CoreException.swift */; };
@@ -55,6 +58,9 @@
 		511611762B4F2FA30006D3D8 /* BookReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookReactor.swift; sourceTree = "<group>"; };
 		511FF70A2B5326EC0048B549 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		512913ED2B50903F00B08253 /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
+		513A1FE12B53D3C8007F1543 /* RegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationView.swift; sourceTree = "<group>"; };
+		513A1FE32B53D520007F1543 /* RegistrationReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationReactor.swift; sourceTree = "<group>"; };
+		515DBCB52B5346E6000F2593 /* StartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartView.swift; sourceTree = "<group>"; };
 		5160CDF32B46F38600DED429 /* RemoteBookList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteBookList.swift; sourceTree = "<group>"; };
 		5160CDF52B46F56400DED429 /* ApiClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiClient.swift; sourceTree = "<group>"; };
 		5160CDF72B46F71C00DED429 /* CoreException.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreException.swift; sourceTree = "<group>"; };
@@ -129,12 +135,36 @@
 			path = Persistence;
 			sourceTree = "<group>";
 		};
+		513A1FE02B53D3BB007F1543 /* Registration */ = {
+			isa = PBXGroup;
+			children = (
+				513A1FE12B53D3C8007F1543 /* RegistrationView.swift */,
+				513A1FE32B53D520007F1543 /* RegistrationReactor.swift */,
+			);
+			path = Registration;
+			sourceTree = "<group>";
+		};
+		513A1FE52B53DCEA007F1543 /* Exceptions */ = {
+			isa = PBXGroup;
+			children = (
+				5160CDF72B46F71C00DED429 /* CoreException.swift */,
+			);
+			path = Exceptions;
+			sourceTree = "<group>";
+		};
+		515DBCB42B5346D8000F2593 /* Start */ = {
+			isa = PBXGroup;
+			children = (
+				515DBCB52B5346E6000F2593 /* StartView.swift */,
+			);
+			path = Start;
+			sourceTree = "<group>";
+		};
 		5160CDF22B46F36D00DED429 /* Remote */ = {
 			isa = PBXGroup;
 			children = (
 				5160CDF32B46F38600DED429 /* RemoteBookList.swift */,
 				5160CDF52B46F56400DED429 /* ApiClient.swift */,
-				5160CDF72B46F71C00DED429 /* CoreException.swift */,
 				5160CDF92B46F98300DED429 /* Endpoint.swift */,
 			);
 			path = Remote;
@@ -143,6 +173,8 @@
 		51E4C5DA2B480FDE004C1E46 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				513A1FE02B53D3BB007F1543 /* Registration */,
+				515DBCB42B5346D8000F2593 /* Start */,
 				510499B22B4DAB0800DD2A93 /* BaseItems */,
 				510499AF2B4DAABD00DD2A93 /* Search */,
 				51E4C5E02B4818D3004C1E46 /* Book */,
@@ -192,6 +224,7 @@
 		51ED91952B45BA1800E7DD70 /* BookOdyssee */ = {
 			isa = PBXGroup;
 			children = (
+				513A1FE52B53DCEA007F1543 /* Exceptions */,
 				511FF70A2B5326EC0048B549 /* Info.plist */,
 				51E4C5DA2B480FDE004C1E46 /* Views */,
 				5160CDF22B46F36D00DED429 /* Remote */,
@@ -365,8 +398,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				515DBCB62B5346E6000F2593 /* StartView.swift in Sources */,
 				51E4C5DC2B481001004C1E46 /* HomeView.swift in Sources */,
 				510499B62B4DAB8100DD2A93 /* BookDataRow.swift in Sources */,
+				513A1FE22B53D3C8007F1543 /* RegistrationView.swift in Sources */,
+				513A1FE42B53D520007F1543 /* RegistrationReactor.swift in Sources */,
 				51ED91A02B45BA1900E7DD70 /* Persistence.swift in Sources */,
 				5160CDF82B46F71C00DED429 /* CoreException.swift in Sources */,
 				51E4C5E22B4818EA004C1E46 /* DataRow.swift in Sources */,
