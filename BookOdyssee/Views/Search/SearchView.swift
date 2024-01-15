@@ -28,7 +28,13 @@ struct SearchView: View {
                         ) {
                             BookView(bookId: book.id)
                         }) {
-                            BookDataRow(book: book)
+                            if let image = book.volumeInfo.imageLinks?.thumbnail, let authors = book.volumeInfo.authors {
+                                BookDataRow(
+                                    title: book.volumeInfo.title,
+                                    image: image,
+                                    authors: authors
+                                )
+                            }
                         }
                     }
                 }

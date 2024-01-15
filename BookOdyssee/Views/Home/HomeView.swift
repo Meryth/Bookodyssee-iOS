@@ -10,14 +10,16 @@ import AsyncReactor
 
 struct HomeView: View {
     
-    @Environment(\.managedObjectContext) private var viewContext
-    @FetchRequest(sortDescriptors: []) var books: FetchedResults<LocalBook>
+    @EnvironmentObject
+    private var reactor : HomeReactor
     
+    @Environment(\.managedObjectContext) private var viewContext
     
     var body: some View {
         NavigationStack {
             VStack {
-                List(books, id: \.id) { book in
+                List(reactor.toReadList, id: \.id) { book in
+                    Section(header: Text(ReadingState.reading.description)) {
                     NavigationLink(destination: ReactorView(
                         BookReactor(dbContext: viewContext)
                     ) {
@@ -25,37 +27,19 @@ struct HomeView: View {
                             BookView(bookId: bookId)
                         }
                     }) {
-                        HStack {
-                            if let image = book.imageLink {
-                                AsyncImage(
-                                    url: URL(string: image),
-                                    content: {image in
-                                        image.resizable()
-                                            .aspectRatio(contentMode: .fit)
-                                            .frame(width: 64, height: 100)
-                                    },
-                                    placeholder: {
-                                       ProgressView()
-                                    }
+                        
+                            if let title = book.title, let image = book.imageLink, let authors = book.authors {
+                                BookDataRow(
+                                    title: title,
+                                    image: image,
+                                    authors: authors
                                 )
-                            } else {
-                                Image("NoImagePlaceholder")
-                                    .resizable()
-                                    .frame(width: 64, height: 100)
-                                    .scaledToFit()
                             }
-                            VStack(alignment: .leading) {
-                                if let title = book.title {
-                                    Text(title)
-                                        .fontWeight(.bold)
-                                }
-                                if let authors = book.authors {
-                                    Text(getAuthorString(authorList:authors))
-                                }
-                            }
-                            Spacer()
                         }
                     }
+                }
+                .task {
+                    reactor.send(.loadBooks)
                 }
                 .navigationTitle("To Read")
             }.toolbar {
@@ -69,7 +53,6 @@ struct HomeView: View {
                     }
                 }
             }
-            
         }
     }
 }

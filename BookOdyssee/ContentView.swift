@@ -16,10 +16,13 @@ struct ContentView: View {
     @State
     private var didLogin = false
     
+    // TODO: refactor navigation logic to use navigationDestination
     var body: some View {
         ZStack {
-            if didLogin {
-                HomeView()
+            if !didLogin {
+                ReactorView(HomeReactor(moc: viewContext)) {
+                    HomeView()
+                }
             } else {
                 StartView()
             }
