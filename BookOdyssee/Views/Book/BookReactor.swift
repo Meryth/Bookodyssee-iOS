@@ -113,7 +113,7 @@ extension BookReactor {
         localBook.imageLink = bookItem.volumeInfo.imageLinks?.thumbnail
         localBook.publishedDate = bookItem.volumeInfo.publishedDate
         localBook.publisher = bookItem.volumeInfo.publisher
-        localBook.readingState = "TO READ"
+        localBook.readingState = ReadingState.toRead.description
         
         return localBook
     }

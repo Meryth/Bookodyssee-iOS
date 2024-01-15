@@ -13,15 +13,20 @@ struct ContentView: View {
     
     @Environment(\.managedObjectContext) private var viewContext
     
+    @State
+    private var didLogin = false
+    
     var body: some View {
-        //        ReactorView(
-        //            RegistrationReactor(moc: viewContext)
-        //        ) {
-        //            RegistrationView()
-        //        }
-        
-        
-        StartView()
+        ZStack {
+            if didLogin {
+                HomeView()
+            } else {
+                StartView()
+            }
+        }
+        .onReceive(NotificationCenter.default.publisher(for: .DidLogin)) { _ in
+            didLogin = true
+        }
     }
 }
 

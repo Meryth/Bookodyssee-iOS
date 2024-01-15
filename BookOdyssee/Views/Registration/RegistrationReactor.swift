@@ -61,6 +61,7 @@ class RegistrationReactor: AsyncReactor {
                 if users.isEmpty {
                     convertUserInputToLocalUser(username: state.username, password: state.password)
                     try moc.save()
+                    NotificationCenter.default.post(name: .DidLogin, object: nil)
                 } else {
                     throw CoreException.UserAlreadyExistsError
                 }

@@ -9,6 +9,10 @@ import Foundation
 import AsyncReactor
 import CoreData
 
+public extension Notification.Name {
+  static let DidLogin = Notification.Name("login")
+}
+
 class LoginReactor: AsyncReactor {
     var moc: NSManagedObjectContext
     
@@ -58,7 +62,7 @@ class LoginReactor: AsyncReactor {
                 if users.isEmpty {
                     throw CoreException.InvalidCredentialsError
                 } else {
-                    state.shouldNavigate = true
+                    NotificationCenter.default.post(name: .DidLogin, object: nil)
                 }
             } catch {
                 print("Invalid credentials!")
