@@ -14,13 +14,14 @@ struct ContentView: View {
     @Environment(\.managedObjectContext) private var viewContext
     
     var body: some View {
-        ReactorView(
-            RegistrationReactor(moc: viewContext)) {
-                RegistrationView()
-            }
+        //        ReactorView(
+        //            RegistrationReactor(moc: viewContext)
+        //        ) {
+        //            RegistrationView()
+        //        }
         
         
-//        HomeView()
+        StartView()
     }
 }
 

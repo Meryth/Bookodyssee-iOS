@@ -12,6 +12,8 @@
 		510499B12B4DAADA00DD2A93 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 510499B02B4DAADA00DD2A93 /* SearchView.swift */; };
 		510499B62B4DAB8100DD2A93 /* BookDataRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 510499B52B4DAB8100DD2A93 /* BookDataRow.swift */; };
 		511611772B4F2FA30006D3D8 /* BookReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 511611762B4F2FA30006D3D8 /* BookReactor.swift */; };
+		511D28262B54172900CF1C6D /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 511D28252B54172900CF1C6D /* LoginView.swift */; };
+		511D28282B54176300CF1C6D /* LoginReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 511D28272B54176300CF1C6D /* LoginReactor.swift */; };
 		512913EE2B50903F00B08253 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 512913ED2B50903F00B08253 /* DataController.swift */; };
 		513A1FE22B53D3C8007F1543 /* RegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 513A1FE12B53D3C8007F1543 /* RegistrationView.swift */; };
 		513A1FE42B53D520007F1543 /* RegistrationReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 513A1FE32B53D520007F1543 /* RegistrationReactor.swift */; };
@@ -56,6 +58,8 @@
 		510499B02B4DAADA00DD2A93 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		510499B52B4DAB8100DD2A93 /* BookDataRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDataRow.swift; sourceTree = "<group>"; };
 		511611762B4F2FA30006D3D8 /* BookReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookReactor.swift; sourceTree = "<group>"; };
+		511D28252B54172900CF1C6D /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		511D28272B54176300CF1C6D /* LoginReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginReactor.swift; sourceTree = "<group>"; };
 		511FF70A2B5326EC0048B549 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		512913ED2B50903F00B08253 /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 		513A1FE12B53D3C8007F1543 /* RegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationView.swift; sourceTree = "<group>"; };
@@ -125,6 +129,15 @@
 			path = BaseItems;
 			sourceTree = "<group>";
 		};
+		511D28242B54172100CF1C6D /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				511D28252B54172900CF1C6D /* LoginView.swift */,
+				511D28272B54176300CF1C6D /* LoginReactor.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
 		512913E92B508D5400B08253 /* Persistence */ = {
 			isa = PBXGroup;
 			children = (
@@ -173,6 +186,7 @@
 		51E4C5DA2B480FDE004C1E46 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				511D28242B54172100CF1C6D /* Login */,
 				513A1FE02B53D3BB007F1543 /* Registration */,
 				515DBCB42B5346D8000F2593 /* Start */,
 				510499B22B4DAB0800DD2A93 /* BaseItems */,
@@ -406,6 +420,7 @@
 				51ED91A02B45BA1900E7DD70 /* Persistence.swift in Sources */,
 				5160CDF82B46F71C00DED429 /* CoreException.swift in Sources */,
 				51E4C5E22B4818EA004C1E46 /* DataRow.swift in Sources */,
+				511D28282B54176300CF1C6D /* LoginReactor.swift in Sources */,
 				5160CDFA2B46F98300DED429 /* Endpoint.swift in Sources */,
 				510499AE2B4D9EF300DD2A93 /* SearchReactor.swift in Sources */,
 				51ED91992B45BA1800E7DD70 /* ContentView.swift in Sources */,
@@ -416,6 +431,7 @@
 				5160CDF62B46F56400DED429 /* ApiClient.swift in Sources */,
 				512913EE2B50903F00B08253 /* DataController.swift in Sources */,
 				51ED91A32B45BA1900E7DD70 /* BookOdyssee.xcdatamodeld in Sources */,
+				511D28262B54172900CF1C6D /* LoginView.swift in Sources */,
 				51E4C5DE2B4811F0004C1E46 /* BookView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -6,54 +6,63 @@
 //
 
 import SwiftUI
+import AsyncReactor
 
 struct StartView: View {
+    
+    @Environment(\.managedObjectContext) private var viewContext
+    
     var body: some View {
-        VStack() {
-            Text("Welcome to\nBookOdyssee!")
-                .font(.largeTitle)
-                .foregroundStyle(Color("Secondary"))
-                .padding(.bottom)
-                .multilineTextAlignment(.center)
-            
-            
-            Image("Logo")
-                .resizable()
-                .frame(width: 250, height: 130)
-                .scaledToFit()
-                .padding()
-            
-            Text("Your pocket library to go")
-                .font(.caption)
-                .foregroundStyle(Color("Secondary"))
-            
-            
-            Group{
-                Button(action: {
-                    
-                }) {
-                    Text("Login")
-                        .padding(15)
+        NavigationStack {
+            VStack() {
+                Text("Welcome to\nBookOdyssee!")
+                    .font(.largeTitle)
+                    .foregroundStyle(Color("Secondary"))
+                    .padding(.bottom)
+                    .multilineTextAlignment(.center)
+                
+                
+                Image("Logo")
+                    .resizable()
+                    .frame(width: 250, height: 130)
+                    .scaledToFit()
+                    .padding()
+                
+                Text("Your pocket library to go")
+                    .font(.caption)
+                    .foregroundStyle(Color("Secondary"))
+                
+                
+                Group{
+                    NavigationLink(
+                        destination: ReactorView(LoginReactor(moc: viewContext)) {
+                            LoginView()
+                        }
+                    ) {
+                        Text("Login").padding(15)
+                    }.buttonStyle(.borderless)
                         .frame(maxWidth: .infinity)
                         .background(Color("Primary"))
                         .foregroundColor(.white)
+                        .padding(.vertical)
                 }
-            }.padding(.vertical)
-            
-            
-            Button( action: {
                 
-            }) {
-                Text("Register")
-                    .padding(15)
-                    .frame(maxWidth: .infinity)
-                    .background(Color("Primary"))
-                    .foregroundColor(.white)
+                
+                NavigationLink(
+                    destination: ReactorView(RegistrationReactor(moc: viewContext)) {
+                        RegistrationView()
+                    }
+                ) {
+                    Text("Register").padding(15)
+                }
+                .buttonStyle(.borderless)
+                .frame(maxWidth: .infinity)
+                .background(Color("Primary"))
+                .foregroundColor(.white)
             }
-            
+            .frame(maxWidth: .infinity)
+            .padding(.horizontal)
         }
-        .frame(maxWidth: .infinity)
-        .padding(.horizontal)
     }
 }
 
