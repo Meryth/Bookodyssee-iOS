@@ -18,25 +18,49 @@ struct HomeView: View {
     var body: some View {
         NavigationStack {
             VStack {
-                List(reactor.toReadList, id: \.id) { book in
+                List {
                     Section(header: Text(ReadingState.reading.description)) {
-                    NavigationLink(destination: ReactorView(
-                        BookReactor(dbContext: viewContext)
-                    ) {
-                        if let bookId = book.bookId {
-                            BookView(bookId: bookId)
-                        }
-                    }) {
-                        
-                            if let title = book.title, let image = book.imageLink, let authors = book.authors {
-                                BookDataRow(
-                                    title: title,
-                                    image: image,
-                                    authors: authors
-                                )
+                        ForEach(reactor.currentlyReadingList, id: \.id) { book in
+                            NavigationLink(destination: ReactorView(
+                                BookReactor(dbContext: viewContext)
+                            ) {
+                                if let bookId = book.bookId {
+                                    BookView(bookId: bookId)
+                                }
+                            }) {
+                                
+                                if let title = book.title, let image = book.imageLink, let authors = book.authors {
+                                    BookDataRow(
+                                        title: title,
+                                        image: image,
+                                        authors: authors
+                                    )
+                                }
                             }
                         }
                     }
+                    
+                    Section(header: Text(ReadingState.toRead.description)) {
+                        ForEach(reactor.toReadList, id: \.id) { book in
+                            NavigationLink(destination: ReactorView(
+                                BookReactor(dbContext: viewContext)
+                            ) {
+                                if let bookId = book.bookId {
+                                    BookView(bookId: bookId)
+                                }
+                            }) {
+                                
+                                if let title = book.title, let image = book.imageLink, let authors = book.authors {
+                                    BookDataRow(
+                                        title: title,
+                                        image: image,
+                                        authors: authors
+                                    )
+                                }
+                            }
+                        }
+                    }
+                    
                 }
                 .task {
                     reactor.send(.loadBooks)

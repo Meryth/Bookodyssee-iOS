@@ -36,9 +36,15 @@ class HomeReactor: AsyncReactor {
         case .loadBooks:
             do {
                 let savedBooks : NSFetchRequest<LocalBook> = LocalBook.fetchRequest()
-                savedBooks.predicate = NSPredicate(format: "readingState == %@", ReadingState.toRead.description)
+                let readingList = try moc.fetch(savedBooks)
                 
-                state.toReadList = try moc.fetch(savedBooks)
+                state.currentlyReadingList = readingList.filter { book in
+                   return book.readingState == ReadingState.reading.description
+                }
+                
+                state.toReadList = readingList.filter {book in
+                    return book.readingState == ReadingState.toRead.description
+                }
                 
             } catch {
                 print("Error when fetching books!")
