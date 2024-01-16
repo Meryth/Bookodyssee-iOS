@@ -35,7 +35,7 @@ struct HomeView: View {
                     
                 }
                 
-            }.task {
+            } .task {
                 reactor.send(.loadBooks)
             }
             .navigationTitle("To Read")

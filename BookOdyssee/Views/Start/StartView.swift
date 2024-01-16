@@ -39,12 +39,12 @@ struct StartView: View {
                             LoginView()
                         }
                     ) {
-                        Text("Login").padding(15)
-                    }.buttonStyle(.borderless)
-                        .frame(maxWidth: .infinity)
-                        .background(Color("Primary"))
-                        .foregroundColor(.white)
-                        .padding(.vertical)
+                        Text("Login").padding(15).buttonStyle(.borderless)
+                            .frame(maxWidth: .infinity)
+                            .background(Color("Primary"))
+                            .foregroundColor(.white)
+                            .padding(.vertical)
+                    }
                 }
                 
                 
@@ -53,12 +53,14 @@ struct StartView: View {
                         RegistrationView()
                     }
                 ) {
-                    Text("Register").padding(15)
+                    Text("Register")
+                        .padding(15)
+                        .buttonStyle(.borderless)
+                        .frame(maxWidth: .infinity)
+                        .background(Color("Primary"))
+                        .foregroundColor(.white)
                 }
-                .buttonStyle(.borderless)
-                .frame(maxWidth: .infinity)
-                .background(Color("Primary"))
-                .foregroundColor(.white)
+                
             }
             .frame(maxWidth: .infinity)
             .padding(.horizontal)
