@@ -41,7 +41,7 @@ struct BookView: View {
                 }.frame(
                     maxWidth: .infinity,
                     alignment: Alignment.center
-                )
+                ).padding(.bottom)
                 
                 
                 Divider()

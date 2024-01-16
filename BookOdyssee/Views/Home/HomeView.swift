@@ -34,11 +34,12 @@ struct HomeView: View {
                     }
                     
                 }
-                .task {
-                    reactor.send(.loadBooks)
-                }
-                .navigationTitle("To Read")
-            }.toolbar {
+                
+            }.task {
+                reactor.send(.loadBooks)
+            }
+            .navigationTitle("To Read")
+            .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     NavigationLink(
                         destination: ReactorView(SearchReactor()) {

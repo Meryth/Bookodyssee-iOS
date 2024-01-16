@@ -1,15 +1,15 @@
 //
-//  HomeReactor.swift
+//  FinishedReactor.swift
 //  BookOdyssee
 //
-//  Created by Elna on 15.01.24.
+//  Created by Elna on 16.01.24.
 //
 
 import Foundation
 import AsyncReactor
 import CoreData
 
-class HomeReactor: AsyncReactor {
+class FinishedReactor: AsyncReactor {
     
     var moc: NSManagedObjectContext
     
@@ -18,8 +18,7 @@ class HomeReactor: AsyncReactor {
     }
     
     struct State {
-        var toReadList: [LocalBook] = []
-        var currentlyReadingList: [LocalBook] = []
+        var finishedList: [LocalBook] = []
     }
     
     @Published
@@ -36,21 +35,14 @@ class HomeReactor: AsyncReactor {
         case .loadBooks:
             do {
                 let savedBooks : NSFetchRequest<LocalBook> = LocalBook.fetchRequest()
+                savedBooks.predicate = NSPredicate(format: "readingState == %@", ReadingState.finished.description)
                 let bookList = try moc.fetch(savedBooks)
                 
-                state.currentlyReadingList = bookList.filter { book in
-                   return book.readingState == ReadingState.reading.description
-                }
-                
-                state.toReadList = bookList.filter {book in
-                    return book.readingState == ReadingState.toRead.description
-                }
-                
+                state.finishedList = bookList
             } catch {
                 print("Error when fetching books!")
                 print(error)
             }
         }
     }
-    
 }
