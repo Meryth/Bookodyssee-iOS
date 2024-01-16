@@ -19,46 +19,18 @@ struct HomeView: View {
         NavigationStack {
             VStack {
                 List {
-                    Section(header: Text(ReadingState.reading.description)) {
-                        ForEach(reactor.currentlyReadingList, id: \.id) { book in
-                            NavigationLink(destination: ReactorView(
-                                BookReactor(dbContext: viewContext)
-                            ) {
-                                if let bookId = book.bookId {
-                                    BookView(bookId: bookId)
-                                }
-                            }) {
-                                
-                                if let title = book.title, let image = book.imageLink, let authors = book.authors {
-                                    BookDataRow(
-                                        title: title,
-                                        image: image,
-                                        authors: authors
-                                    )
-                                }
-                            }
-                        }
+                    Section(
+                        header: Text("Currently reading")
+                            .foregroundStyle(Color("Primary"))
+                    ) {
+                        BookList(bookList: reactor.currentlyReadingList)
                     }
                     
-                    Section(header: Text(ReadingState.toRead.description)) {
-                        ForEach(reactor.toReadList, id: \.id) { book in
-                            NavigationLink(destination: ReactorView(
-                                BookReactor(dbContext: viewContext)
-                            ) {
-                                if let bookId = book.bookId {
-                                    BookView(bookId: bookId)
-                                }
-                            }) {
-                                
-                                if let title = book.title, let image = book.imageLink, let authors = book.authors {
-                                    BookDataRow(
-                                        title: title,
-                                        image: image,
-                                        authors: authors
-                                    )
-                                }
-                            }
-                        }
+                    Section(
+                        header: Text("Want to read")
+                            .foregroundStyle(Color("Primary"))
+                    ) {
+                        BookList(bookList: reactor.toReadList)
                     }
                     
                 }
@@ -74,6 +46,8 @@ struct HomeView: View {
                         }
                     ) {
                         Image(systemName: "plus")
+                            .renderingMode(.template)
+                            .foregroundColor(Color("Primary"))
                     }
                 }
             }

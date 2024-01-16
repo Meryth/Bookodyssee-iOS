@@ -24,6 +24,7 @@
 		5160CDFA2B46F98300DED429 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5160CDF92B46F98300DED429 /* Endpoint.swift */; };
 		51854D492B558B69002EA2FC /* ReadingState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51854D482B558B69002EA2FC /* ReadingState.swift */; };
 		51854D4B2B5592CE002EA2FC /* HomeReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51854D4A2B5592CE002EA2FC /* HomeReactor.swift */; };
+		51E062842B56CF9C00C1F4BB /* BookList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51E062832B56CF9C00C1F4BB /* BookList.swift */; };
 		51E4C5DC2B481001004C1E46 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51E4C5DB2B481001004C1E46 /* HomeView.swift */; };
 		51E4C5DE2B4811F0004C1E46 /* BookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51E4C5DD2B4811F0004C1E46 /* BookView.swift */; };
 		51E4C5E22B4818EA004C1E46 /* DataRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51E4C5E12B4818EA004C1E46 /* DataRow.swift */; };
@@ -73,6 +74,7 @@
 		5160CDF92B46F98300DED429 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		51854D482B558B69002EA2FC /* ReadingState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadingState.swift; sourceTree = "<group>"; };
 		51854D4A2B5592CE002EA2FC /* HomeReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeReactor.swift; sourceTree = "<group>"; };
+		51E062832B56CF9C00C1F4BB /* BookList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookList.swift; sourceTree = "<group>"; };
 		51E4C5DB2B481001004C1E46 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		51E4C5DD2B4811F0004C1E46 /* BookView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookView.swift; sourceTree = "<group>"; };
 		51E4C5E12B4818EA004C1E46 /* DataRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataRow.swift; sourceTree = "<group>"; };
@@ -129,6 +131,7 @@
 			isa = PBXGroup;
 			children = (
 				510499B52B4DAB8100DD2A93 /* BookDataRow.swift */,
+				51E062832B56CF9C00C1F4BB /* BookList.swift */,
 			);
 			path = BaseItems;
 			sourceTree = "<group>";
@@ -422,6 +425,7 @@
 				51E4C5DC2B481001004C1E46 /* HomeView.swift in Sources */,
 				51854D4B2B5592CE002EA2FC /* HomeReactor.swift in Sources */,
 				510499B62B4DAB8100DD2A93 /* BookDataRow.swift in Sources */,
+				51E062842B56CF9C00C1F4BB /* BookList.swift in Sources */,
 				513A1FE22B53D3C8007F1543 /* RegistrationView.swift in Sources */,
 				513A1FE42B53D520007F1543 /* RegistrationReactor.swift in Sources */,
 				51ED91A02B45BA1900E7DD70 /* Persistence.swift in Sources */,
