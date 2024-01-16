@@ -67,25 +67,39 @@ struct BookView: View {
                 Spacer()
                 
                 VStack() {
-                    if(reactor.readingState != ReadingState.notAdded.description) {
+                    if(reactor.readingState == ReadingState.notAdded.description) {
                         Button(action: {
-                            reactor.send(.startReadingBook)
+                            reactor.send(.addBookToReadingList)
                         }) {
-                            Text("Start reading")
+                            Text("Add to reading list")
                                 .padding(15)
                                 .frame(maxWidth: .infinity)
                                 .background(Color("Primary"))
                                 .foregroundColor(.white)
                         }
+                    } else {
+                        if(reactor.readingState == ReadingState.toRead.description) {
+                            Button(action: {
+                                reactor.send(.startReadingBook)
+                            }) {
+                                Text("Start reading")
+                                    .padding(15)
+                                    .frame(maxWidth: .infinity)
+                                    .background(Color("Primary"))
+                                    .foregroundColor(.white)
+                            }
+                        }
                         
-                        Button(action: {
-                            reactor.send(.finishBook)
-                        }) {
-                            Text("Finish")
-                                .padding(15)
-                                .frame(maxWidth: .infinity)
-                                .background(Color("Primary"))
-                                .foregroundColor(.white)
+                        if(reactor.readingState == ReadingState.toRead.description || reactor.readingState == ReadingState.reading.description) {
+                            Button(action: {
+                                reactor.send(.finishBook)
+                            }) {
+                                Text("Finish")
+                                    .padding(15)
+                                    .frame(maxWidth: .infinity)
+                                    .background(Color("Primary"))
+                                    .foregroundColor(.white)
+                            }
                         }
                         
                         Button(action: {
@@ -97,18 +111,7 @@ struct BookView: View {
                                 .background(Color("Primary"))
                                 .foregroundColor(.white)
                         }
-                    } else {
-                        Button(action: {
-                            reactor.send(.addBookToReadingList)
-                        }) {
-                            Text("Add to list")
-                                .padding(15)
-                                .frame(maxWidth: .infinity)
-                                .background(Color("Primary"))
-                                .foregroundColor(.white)
-                        }
                     }
-                    
                 }.padding(.horizontal)
                 
                 Spacer()
