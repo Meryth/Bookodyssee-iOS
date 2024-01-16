@@ -66,12 +66,32 @@ struct BookView: View {
                 
                 Spacer()
                 
-                HStack() {
-                    if(reactor.isBookSavedToRead) {
+                VStack() {
+                    if(reactor.readingState != ReadingState.notAdded.description) {
+                        Button(action: {
+                            reactor.send(.startReadingBook)
+                        }) {
+                            Text("Start reading")
+                                .padding(15)
+                                .frame(maxWidth: .infinity)
+                                .background(Color("Primary"))
+                                .foregroundColor(.white)
+                        }
+                        
+                        Button(action: {
+                            reactor.send(.finishBook)
+                        }) {
+                            Text("Finish")
+                                .padding(15)
+                                .frame(maxWidth: .infinity)
+                                .background(Color("Primary"))
+                                .foregroundColor(.white)
+                        }
+                        
                         Button(action: {
                             reactor.send(.removeBookFromReadingList)
                         }) {
-                            Text("Remove from list")
+                            Text("Remove from reading list")
                                 .padding(15)
                                 .frame(maxWidth: .infinity)
                                 .background(Color("Primary"))
