@@ -15,6 +15,7 @@ public extension Notification.Name {
 
 class LoginReactor: AsyncReactor {
     var moc: NSManagedObjectContext
+    let defaults = UserDefaults.standard
     
     enum Action {
         case onLoginClick
@@ -62,6 +63,9 @@ class LoginReactor: AsyncReactor {
                 if users.isEmpty {
                     throw CoreException.InvalidCredentialsError
                 } else {
+                    if let userId = users.first?.userId {
+                        defaults.set(userId, forKey: "UserId")
+                    }
                     NotificationCenter.default.post(name: .DidLogin, object: nil)
                 }
             } catch {

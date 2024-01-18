@@ -12,6 +12,7 @@ import CoreData
 class HomeReactor: AsyncReactor {
     
     var moc: NSManagedObjectContext
+    let defaults = UserDefaults.standard
     
     enum Action {
         case loadBooks
@@ -36,6 +37,10 @@ class HomeReactor: AsyncReactor {
         case .loadBooks:
             do {
                 let savedBooks : NSFetchRequest<LocalBook> = LocalBook.fetchRequest()
+                guard let userId = defaults.string(forKey: "UserId") else {
+                    throw CoreException.NilPointerError
+                }
+                savedBooks.predicate = NSPredicate(format: "userId == %@", userId)
                 let bookList = try moc.fetch(savedBooks)
                 
                 state.currentlyReadingList = bookList.filter { book in

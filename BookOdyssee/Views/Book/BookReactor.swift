@@ -14,6 +14,7 @@ private let apiClient = ApiClient()
 class BookReactor: AsyncReactor {
     
     var moc: NSManagedObjectContext
+    let defaults = UserDefaults.standard
     
     enum Action {
         case loadBookData(String)
@@ -46,7 +47,10 @@ class BookReactor: AsyncReactor {
                 
                 let savedBooks : NSFetchRequest<LocalBook> = LocalBook.fetchRequest()
                 if let bookId = state.book?.id {
-                    savedBooks.predicate = NSPredicate(format: "bookId == %@", bookId)
+                    guard let userId = defaults.string(forKey: "UserId") else {
+                        throw CoreException.NilPointerError
+                    }
+                    savedBooks.predicate = NSPredicate(format: "bookId == %@ AND userId == %@", bookId, userId)
                     let numberOfBooks = try moc.count(for: savedBooks)
                     
                     if numberOfBooks <= 0 {
@@ -83,7 +87,11 @@ class BookReactor: AsyncReactor {
                 let savedBooks : NSFetchRequest<LocalBook> = LocalBook.fetchRequest()
                 
                 if let bookId = state.book?.id {
-                    savedBooks.predicate = NSPredicate(format: "bookId == %@", bookId)
+                    guard let userId = defaults.string(forKey: "UserId") else {
+                        print("UserId is nil!")
+                        return
+                    }
+                    savedBooks.predicate = NSPredicate(format: "bookId == %@ AND userId == %@", bookId, userId)
                     
                     do {
                         let objects = try moc.fetch(savedBooks).first
@@ -110,8 +118,13 @@ class BookReactor: AsyncReactor {
             do {
                 let savedBooks : NSFetchRequest<LocalBook> = LocalBook.fetchRequest()
                 
+                guard let userId = defaults.string(forKey: "UserId") else {
+                    print("UserId is nil!")
+                    return
+                }
+                
                 if let bookId = state.book?.id {
-                    savedBooks.predicate = NSPredicate(format: "bookId == %@", bookId)
+                    savedBooks.predicate = NSPredicate(format: "bookId == %@ AND userId", bookId, userId)
                     
                     do {
                         let objects = try moc.fetch(savedBooks).first
@@ -137,8 +150,13 @@ class BookReactor: AsyncReactor {
             do {
                 let savedBooks : NSFetchRequest<LocalBook> = LocalBook.fetchRequest()
                 
+                guard let userId = defaults.string(forKey: "UserId") else {
+                    print("UserId is nil!")
+                    return
+                }
+                
                 if let bookId = state.book?.id {
-                    savedBooks.predicate = NSPredicate(format: "bookId == %@", bookId)
+                    savedBooks.predicate = NSPredicate(format: "bookId == %@ AND userId == %@", bookId, userId)
                     
                     do {
                         let objects = try moc.fetch(savedBooks).first
@@ -175,5 +193,6 @@ extension BookReactor {
         localBook.publishedDate = bookItem.volumeInfo.publishedDate
         localBook.publisher = bookItem.volumeInfo.publisher
         localBook.readingState = ReadingState.toRead.description
+        localBook.userId = defaults.string(forKey: "UserId")
     }
 }

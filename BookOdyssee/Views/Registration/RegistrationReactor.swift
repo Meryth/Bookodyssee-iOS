@@ -11,6 +11,7 @@ import CoreData
 
 class RegistrationReactor: AsyncReactor {
     var moc: NSManagedObjectContext
+    let defaults = UserDefaults.standard
     
     enum Action {
         case onRegisterClick
@@ -76,9 +77,14 @@ class RegistrationReactor: AsyncReactor {
 
 extension RegistrationReactor {
     func convertUserInputToLocalUser(username: String, password: String) {
+        let userId = UUID().uuidString
         let localUser = LocalUser(context: moc)
         
         localUser.username = username
         localUser.password = password
+        localUser.userId = userId
+        
+        defaults.set(userId, forKey: "UserId")
+        
     }
 }
