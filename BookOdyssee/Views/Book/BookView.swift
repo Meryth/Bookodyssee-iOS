@@ -41,7 +41,7 @@ struct BookView: View {
                 }.frame(
                     maxWidth: .infinity,
                     alignment: Alignment.center
-                )
+                ).padding(.bottom)
                 
                 
                 Divider()
@@ -66,25 +66,52 @@ struct BookView: View {
                 
                 Spacer()
                 
-                HStack() {
-                    if(reactor.isBookSavedToRead) {
-                        Button("Remove from list", action: {
-                            reactor.send(.removeBookFromReadingList)
-                        })
-                        .padding(15)
-                        .frame(maxWidth: .infinity)
-                        .background(Color("Primary"))
-                        .foregroundColor(.white)
-                    } else {
-                        Button("Add to list", action: {
+                VStack() {
+                    if(reactor.readingState == ReadingState.notAdded.description) {
+                        Button(action: {
                             reactor.send(.addBookToReadingList)
-                        })
-                        .padding(15)
-                        .frame(maxWidth: .infinity)
-                        .background(Color("Primary"))
-                        .foregroundColor(.white)
+                        }) {
+                            Text("Add to reading list")
+                                .padding(15)
+                                .frame(maxWidth: .infinity)
+                                .background(Color("Primary"))
+                                .foregroundColor(.white)
+                        }
+                    } else {
+                        if(reactor.readingState == ReadingState.toRead.description) {
+                            Button(action: {
+                                reactor.send(.startReadingBook)
+                            }) {
+                                Text("Start reading")
+                                    .padding(15)
+                                    .frame(maxWidth: .infinity)
+                                    .background(Color("Primary"))
+                                    .foregroundColor(.white)
+                            }
+                        }
+                        
+                        if(reactor.readingState == ReadingState.toRead.description || reactor.readingState == ReadingState.reading.description) {
+                            Button(action: {
+                                reactor.send(.finishBook)
+                            }) {
+                                Text("Finish")
+                                    .padding(15)
+                                    .frame(maxWidth: .infinity)
+                                    .background(Color("Primary"))
+                                    .foregroundColor(.white)
+                            }
+                        }
+                        
+                        Button(action: {
+                            reactor.send(.removeBookFromReadingList)
+                        }) {
+                            Text("Remove from reading list")
+                                .padding(15)
+                                .frame(maxWidth: .infinity)
+                                .background(Color("Primary"))
+                                .foregroundColor(.white)
+                        }
                     }
-                    
                 }.padding(.horizontal)
                 
                 Spacer()

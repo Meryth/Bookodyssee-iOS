@@ -14,16 +14,19 @@ private let apiClient = ApiClient()
 class BookReactor: AsyncReactor {
     
     var moc: NSManagedObjectContext
+    let defaults = UserDefaults.standard
     
     enum Action {
         case loadBookData(String)
         case addBookToReadingList
         case removeBookFromReadingList
+        case startReadingBook
+        case finishBook
     }
     
     struct State {
         var book: BookItem? = nil
-        var isBookSavedToRead: Bool = false
+        var readingState: String = ReadingState.notAdded.description
         var localBook: LocalBook? = nil
     }
     
@@ -44,11 +47,20 @@ class BookReactor: AsyncReactor {
                 
                 let savedBooks : NSFetchRequest<LocalBook> = LocalBook.fetchRequest()
                 if let bookId = state.book?.id {
-                    savedBooks.predicate = NSPredicate(format: "bookId == %@", bookId)
+                    guard let userId = defaults.string(forKey: "UserId") else {
+                        throw CoreException.NilPointerError
+                    }
+                    savedBooks.predicate = NSPredicate(format: "bookId == %@ AND userId == %@", bookId, userId)
                     let numberOfBooks = try moc.count(for: savedBooks)
                     
-                    if numberOfBooks > 0 {
-                        state.isBookSavedToRead = true
+                    if numberOfBooks <= 0 {
+                        state.readingState = ReadingState.notAdded.description
+                    } else {
+                        let books = try moc.fetch(savedBooks).first
+                        guard let savedReading = books?.readingState else {
+                            throw CoreException.NilPointerError
+                        }
+                        state.readingState = savedReading
                     }
                 }
             } catch {
@@ -65,8 +77,7 @@ class BookReactor: AsyncReactor {
                 convertBookItemToLocalBook(bookItem: bookItem)
                 
                 try moc.save()
-                
-                state.isBookSavedToRead = true
+                state.readingState = ReadingState.toRead.description
             } catch {
                 print("Error while saving book to DB!")
                 print(error)
@@ -76,7 +87,11 @@ class BookReactor: AsyncReactor {
                 let savedBooks : NSFetchRequest<LocalBook> = LocalBook.fetchRequest()
                 
                 if let bookId = state.book?.id {
-                    savedBooks.predicate = NSPredicate(format: "bookId == %@", bookId)
+                    guard let userId = defaults.string(forKey: "UserId") else {
+                        print("UserId is nil!")
+                        return
+                    }
+                    savedBooks.predicate = NSPredicate(format: "bookId == %@ AND userId == %@", bookId, userId)
                     
                     do {
                         let objects = try moc.fetch(savedBooks).first
@@ -86,11 +101,75 @@ class BookReactor: AsyncReactor {
                             
                             do {
                                 try moc.save()
-                                state.isBookSavedToRead = false
+                                state.readingState = ReadingState.notAdded.description
                             } catch {
                                 print("Error while deleting book from DB!")
                                 print(error)
                                 
+                            }
+                        }
+                    } catch {
+                        print("Unable to fetch saved books from DB!")
+                        print(error)
+                    }
+                }
+            }
+        case .startReadingBook:
+            do {
+                let savedBooks : NSFetchRequest<LocalBook> = LocalBook.fetchRequest()
+                
+                guard let userId = defaults.string(forKey: "UserId") else {
+                    print("UserId is nil!")
+                    return
+                }
+                
+                if let bookId = state.book?.id {
+                    savedBooks.predicate = NSPredicate(format: "bookId == %@ AND userId == %@", bookId, userId)
+                    
+                    do {
+                        let objects = try moc.fetch(savedBooks).first
+                        
+                        if let localBook = objects {
+                            localBook.setValue(ReadingState.reading.description, forKey: "readingState")
+                            
+                            do {
+                                try moc.save()
+                                state.readingState = ReadingState.reading.description
+                            } catch {
+                                print("Error while updating reading state!")
+                                print(error)
+                            }
+                        }
+                    } catch {
+                        print("Unable to fetch saved books from DB!")
+                        print(error)
+                    }
+                }
+            }
+        case .finishBook:
+            do {
+                let savedBooks : NSFetchRequest<LocalBook> = LocalBook.fetchRequest()
+                
+                guard let userId = defaults.string(forKey: "UserId") else {
+                    print("UserId is nil!")
+                    return
+                }
+                
+                if let bookId = state.book?.id {
+                    savedBooks.predicate = NSPredicate(format: "bookId == %@ AND userId == %@", bookId, userId)
+                    
+                    do {
+                        let objects = try moc.fetch(savedBooks).first
+                        
+                        if let localBook = objects {
+                            localBook.setValue(ReadingState.finished.description, forKey: "readingState")
+                            
+                            do {
+                                try moc.save()
+                                state.readingState = ReadingState.finished.description
+                            } catch {
+                                print("Error while updating reading state!")
+                                print(error)
                             }
                         }
                     } catch {
@@ -104,7 +183,7 @@ class BookReactor: AsyncReactor {
 }
 
 extension BookReactor {
-    func convertBookItemToLocalBook(bookItem: BookItem) -> LocalBook {
+    func convertBookItemToLocalBook(bookItem: BookItem) {
         let localBook = LocalBook(context: moc)
         
         localBook.bookId = bookItem.id
@@ -113,8 +192,7 @@ extension BookReactor {
         localBook.imageLink = bookItem.volumeInfo.imageLinks?.thumbnail
         localBook.publishedDate = bookItem.volumeInfo.publishedDate
         localBook.publisher = bookItem.volumeInfo.publisher
-        localBook.readingState = "TO READ"
-        
-        return localBook
+        localBook.readingState = ReadingState.toRead.description
+        localBook.userId = defaults.string(forKey: "UserId")
     }
 }

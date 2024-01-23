@@ -13,8 +13,25 @@ struct ContentView: View {
     
     @Environment(\.managedObjectContext) private var viewContext
     
+    @State
+    private var didLogin = false
+    
+    // TODO: refactor navigation logic to use navigationDestination
     var body: some View {
-        HomeView()
+        ZStack {
+            if didLogin {
+//                ReactorView(HomeReactor(moc: viewContext)) {
+//                    HomeView()
+//                }
+                
+                BottomBar()
+            } else {
+                StartView()
+            }
+        }
+        .onReceive(NotificationCenter.default.publisher(for: .DidLogin)) { _ in
+            didLogin = true
+        }
     }
 }
 
