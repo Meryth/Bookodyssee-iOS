@@ -124,7 +124,7 @@ class BookReactor: AsyncReactor {
                 }
                 
                 if let bookId = state.book?.id {
-                    savedBooks.predicate = NSPredicate(format: "bookId == %@ AND userId", bookId, userId)
+                    savedBooks.predicate = NSPredicate(format: "bookId == %@ AND userId == %@", bookId, userId)
                     
                     do {
                         let objects = try moc.fetch(savedBooks).first
