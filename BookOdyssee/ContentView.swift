@@ -20,10 +20,6 @@ struct ContentView: View {
     var body: some View {
         ZStack {
             if didLogin {
-//                ReactorView(HomeReactor(moc: viewContext)) {
-//                    HomeView()
-//                }
-                
                 BottomBar()
             } else {
                 StartView()
