@@ -1,0 +1,14 @@
+{
+  "pins" : [
+    {
+      "identity" : "asyncreactor",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/diamirio/AsyncReactor",
+      "state" : {
+        "revision" : "0f891185bdc73d867cff993dc6c303e1a60fb218",
+        "version" : "1.1.0"
+      }
+    }
+  ],
+  "version" : 2
+}
