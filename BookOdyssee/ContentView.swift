@@ -16,17 +16,29 @@ struct ContentView: View {
     @State
     private var didLogin = false
     
+    @State
+    private var didRegister = false
+    
     // TODO: refactor navigation logic to use navigationDestination
     var body: some View {
         ZStack {
             if didLogin {
                 BottomBar()
+            } else if didRegister {
+                ReactorView(
+                    LoginReactor(moc: viewContext)
+                ) {
+                    LoginView()
+                }
             } else {
                 StartView()
             }
         }
         .onReceive(NotificationCenter.default.publisher(for: .DidLogin)) { _ in
             didLogin = true
+        }
+        .onReceive(NotificationCenter.default.publisher(for: .DidRegister)) {_ in
+            didRegister = true
         }
     }
 }
